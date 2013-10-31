@@ -26,7 +26,7 @@ module Guard
 
     def run_on_changes(paths)
       if paths
-        paths.each { |item| compile_item path}
+        paths.each { |path| compile_item path}
       end
     end
 
