@@ -25,7 +25,7 @@ module Guard
     end
 
     def run_on_changes(paths)
-      @paths.each { |item| compile_item path}
+      @paths.each { |item| compile_item path} if paths
     end
 
     private
