@@ -49,8 +49,9 @@ module Guard
 
     def compile_item(item)
       begin
+        basename = File.basename(item).gsub(/\.erb$/,'')
         template = import(item)
-        File.open(@output,'w'){ |f| f.write(template) }
+        File.open(@output + '/' + basename,'w'){ |f| f.write(template) }
         UI.info         "Compiling #{@input} to #{@output}"
         Notifier.notify "Compiling #{@input} to #{@output}", :title => 'Erb'
         UI.info         "Compiled #{@output}"
