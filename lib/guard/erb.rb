@@ -13,19 +13,19 @@ module Guard
     end
 
     def start
-      compile
+      # compile
     end
 
     def reload
-      compile
+      # compile
     end
 
     def run_all
-      compile
+      # compile
     end
 
     def run_on_changes(paths)
-      compile
+      @paths.each { |item| compile_item path}
     end
 
     private
@@ -34,13 +34,13 @@ module Guard
       ::StructErb.new(locals).render(File.read(file))
     end
 
-    def compile
-      if @input.class.name == 'Array'
-        @input.each { |item| compile_item item}
-      else
-        compile_item @input
-      end
-    end
+    # def compile
+    #   if @input.class.name == 'Array'
+    #     @input.each { |item| compile_item item}
+    #   else
+    #     compile_item @input
+    #   end
+    # end
 
     def compile_item(item)
       begin
