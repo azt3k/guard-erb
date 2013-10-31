@@ -35,19 +35,28 @@ module Guard
     end
 
     def compile
+      if @input.class.name == 'Array'
+        @input.each { |item| compile_item item}
+      else
+        compile_item @input
+      end
+    end
+
+    def compile_item(item)
       begin
-        template = import(@input)
+        template = import(item)
         File.open(@output,'w'){ |f| f.write(template) }
         UI.info         "Compiling #{@input} to #{@output}"
         Notifier.notify "Compiling #{@input} to #{@output}", :title => 'Erb'
-        UI.info  "Compiled #{@output}"
+        UI.info         "Compiled #{@output}"
         true
       rescue Exception => e
         UI.error        "Compiling #{@input} failed: #{e}"
         Notifier.notify "Compiling #{@input} failed: #{e}", :title => 'Erb', :image => :failed
         false
-      end
+      end    
     end
+
   end
 
 end
